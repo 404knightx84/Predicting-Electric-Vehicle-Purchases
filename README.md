@@ -100,17 +100,4 @@ so they can be run standalone with `python src/<file>.py`.
 `src/feature_engineering.py` is the same logic factored out as an importable
 module, and is what the notebook uses.
 
-## Reproduce
-
-```bash
-pip install -r requirements.txt
-
-# place train.csv / test.csv in the project root (not included — competition data)
-
-python src/train_baseline_blend.py      # -> submission.csv (v1)
-python src/train_tuned_ensemble.py      # -> submission_v2.csv (v2), ~15-20 min
-
-# or, interactively:
-jupyter notebook notebooks/EV_Purchase_Prediction.ipynb
-```
 
