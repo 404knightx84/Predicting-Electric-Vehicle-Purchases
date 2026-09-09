@@ -17,3 +17,6 @@ RANDOM_STATE = 42
 train = pd.read_csv("train.csv")
 test = pd.read_csv("test.csv")
 test_ids = test["id"].copy()
+
+RANGE_ANXIETY_MAP = {"Low": 0, "Medium": 1, "High": 2}
+YESNO_MAP = {"No": 0, "Yes": 1}
