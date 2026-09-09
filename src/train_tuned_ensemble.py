@@ -13,3 +13,7 @@ from scipy.optimize import minimize
 optuna.logging.set_verbosity(optuna.logging.WARNING)
 t0 = time.time()
 RANDOM_STATE = 42
+
+train = pd.read_csv("train.csv")
+test = pd.read_csv("test.csv")
+test_ids = test["id"].copy()
