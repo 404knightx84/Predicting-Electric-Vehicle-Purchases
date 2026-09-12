@@ -34,3 +34,22 @@ def engineer(df):
     df["Charging_Readiness"] = df["Home_Charging_Possible"] + (df["Total_Charging_Access"] > 5).astype(int)
     df["High_Income"] = (df["Annual_Income_USD"] > df["Annual_Income_USD"].median()).astype(int)
     return df
+    
+train_fe = engineer(train)
+test_fe = engineer(test)
+
+cat_cols = ["Gender", "City_Type", "Current_Car_Type"]
+for c in cat_cols:
+    le = LabelEncoder()
+    le.fit(pd.concat([train_fe[c], test_fe[c]], axis=0))
+    train_fe[c] = le.transform(train_fe[c])
+    test_fe[c] = le.transform(test_fe[c])
+
+train_fe["target"] = train_fe["Will_Buy_EV"].map(YESNO_MAP)
+feature_cols = [c for c in train_fe.columns if c not in ("id", "Will_Buy_EV", "target")]
+
+X = train_fe[feature_cols].reset_index(drop=True)
+y = train_fe["target"].reset_index(drop=True)
+X_test = test_fe[feature_cols]
+
+print(f"Full train: {X.shape}, test: {X_test.shape}", flush=True)
